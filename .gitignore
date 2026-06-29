@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+*.log
+
+# Éditeurs
+.vscode/
+.idea/
+
+# Secrets — ne jamais committer
+.secrets/
+.env
+*.key
+*.pem
