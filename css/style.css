@@ -16,7 +16,7 @@
 
   --maxw: 1240px;
   --pad: clamp(1.25rem, 4vw, 3rem);
-  --nav-h: 92px;
+  --nav-h: 116px;
   --radius: 16px;
   --shadow: 0 12px 40px rgba(0,0,0,.10);
 
@@ -80,13 +80,8 @@ h1, h2, h3, h4 { line-height: 1.05; letter-spacing: -.01em; text-wrap: balance; 
 .nav.scrolled { background: var(--white); box-shadow: 0 1px 0 var(--line); padding: .55rem 0; }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
 .nav__logo { display: block; }
-.nav__logo img { height: 54px; width: auto; transition: height .3s ease; }
-.nav.scrolled .nav__logo img { height: 44px; }
-.nav__logo .logo-w { display: none; }
-body.home .nav__logo .logo-d { display: none; }
-body.home .nav__logo .logo-w { display: block; }
-body.home .nav.scrolled .nav__logo .logo-d { display: block; }
-body.home .nav.scrolled .nav__logo .logo-w { display: none; }
+.nav__logo img { height: 84px; width: auto; transition: height .3s ease; }
+.nav.scrolled .nav__logo img { height: 64px; }
 
 .nav__right { display: flex; align-items: center; gap: .8rem; }
 .nav__pill {
@@ -231,7 +226,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 /* ---------- Footer ---------- */
 .footer { background: var(--ink); color: rgba(255,255,255,.75); padding-block: 3.5rem 2rem; }
 .footer__top { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.4fr; gap: 2rem; }
-.footer__brand img { height: 52px; margin-bottom: 1rem; }
+.footer__brand img { height: 78px; margin-bottom: 1rem; }
 .footer__brand .nav-tagline { color: rgba(255,255,255,.85); font-family: var(--f-man); font-weight: 600; }
 .footer__contact { margin-top: 2rem; }
 .footer h4 { font-family: var(--f-man); font-size: .75rem; text-transform: uppercase; letter-spacing: .14em; color: #fff; margin-bottom: 1rem; }
