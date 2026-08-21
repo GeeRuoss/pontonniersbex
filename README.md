@@ -6,7 +6,7 @@ Site du Club des Pontonniers de Bex (Chablais vaudois). Reconstruction du site F
 - HTML/CSS/JS vanilla, aucun build
 - Polices : Montserrat (titres) + Manrope (titres doux, nav, boutons) + Inter (corps), via Google Fonts
 - Accent : bleu `#0099FF` (repris du site Framer)
-- Hébergement : GitHub Pages, domaine `pontonniersbex.ch`
+- Hébergement : GitHub Pages, domaine `www.pontonniersbex.ch` (l'apex `pontonniersbex.ch` redirige en 301 vers www)
 
 ## Structure
 ```
@@ -29,7 +29,11 @@ assets/img/           Images (hero, logo, logo-white, galerie, news)
 - Design, contenu et photos repris de l'ancien site Framer (navbar, polices Montserrat/Manrope, accent bleu).
 
 ## Déploiement
-Push sur `main` → GitHub Pages sert la racine. Le fichier `CNAME` fixe le domaine `pontonniersbex.ch`.
+Push sur `main` → GitHub Pages sert la racine. Le fichier `CNAME` fixe le domaine `www.pontonniersbex.ch`.
+
+⚠️ **Ne jamais supprimer ni écraser le fichier `CNAME`** (pas de force-push sur `main`) : il est géré par les réglages GitHub Pages, et le perdre décroche le domaine custom et casse le certificat HTTPS.
+
+**Historique certificat (21/08/2026)** : le certificat de l'apex `pontonniersbex.ch` était bloqué chez GitHub à l'état `authorization_created` depuis le 29/06 (DNS pourtant valide). GitHub indexe les certificats par nom de domaine : retirer/remettre le domaine ne fait que *reprendre* l'enregistrement cassé. La bascule du domaine principal sur `www.pontonniersbex.ch` a créé un enregistrement neuf et débloqué l'émission. Le certificat couvre les deux noms (`www` + apex).
 
 ---
 Designed by Ruoss! Communication
