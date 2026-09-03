@@ -1,0 +1,27 @@
+# Configuration Netlify — site des Pontonniers de Bex
+#
+# Pourquoi Netlify : GitHub Pages n'émet plus de certificat HTTPS pour les
+# domaines custom (panne de leur file de provisioning depuis fin août 2026,
+# voir github.com/orgs/community/discussions/205765). Le code reste sur GitHub,
+# Netlify héberge et porte le HTTPS (Let's Encrypt automatique).
+#
+# Site 100 % statique : aucun build, on publie la racine du repo telle quelle.
+
+[build]
+  publish = "."
+  command = ""
+
+# Domaine principal = www (canonical/sitemap/og déjà en www).
+# L'apex pontonniersbex.ch est redirigé vers www par Netlify (réglage "domain
+# management" : www défini comme primary domain) — pas besoin de règle ici.
+
+# Les URLs sans extension (/societe, /programme…) sont servies depuis
+# societe.html etc. par la fonctionnalité "Pretty URLs" de Netlify, comme sur
+# GitHub Pages. 404.html à la racine est utilisé automatiquement.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
