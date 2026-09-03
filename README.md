@@ -1,12 +1,12 @@
 # Pontonniers de Bex
 
-Site du Club des Pontonniers de Bex (Chablais vaudois). Reconstruction du site Framer en HTML/CSS/JS vanilla, hébergé sur GitHub Pages.
+Site du Club des Pontonniers de Bex (Chablais vaudois). Reconstruction du site Framer en HTML/CSS/JS vanilla, hébergé sur Netlify.
 
 ## Stack
 - HTML/CSS/JS vanilla, aucun build
 - Polices : Montserrat (titres) + Manrope (titres doux, nav, boutons) + Inter (corps), via Google Fonts
 - Accent : bleu `#0099FF` (repris du site Framer)
-- Hébergement : GitHub Pages, domaine `www.pontonniersbex.ch` (l'apex `pontonniersbex.ch` redirige en 301 vers www)
+- Hébergement : **Netlify** (projet `pontonniersbex`), domaine principal `www.pontonniersbex.ch` ; l'apex `pontonniersbex.ch` redirige en 301 vers www. HTTPS Let's Encrypt automatique (apex + www).
 
 ## Structure
 ```
@@ -29,11 +29,19 @@ assets/img/           Images (hero, logo, logo-white, galerie, news)
 - Design, contenu et photos repris de l'ancien site Framer (navbar, polices Montserrat/Manrope, accent bleu).
 
 ## Déploiement
-Push sur `main` → GitHub Pages sert la racine. Le fichier `CNAME` fixe le domaine `www.pontonniersbex.ch`.
+Push sur `main` → Netlify publie la racine du repo telle quelle (`netlify.toml` : `publish = "."`, aucun build). Les URLs sans extension (`/societe` → `societe.html`) et `404.html` sont gérées nativement.
 
-⚠️ **Ne jamais supprimer ni écraser le fichier `CNAME`** (pas de force-push sur `main`) : il est géré par les réglages GitHub Pages, et le perdre décroche le domaine custom et casse le certificat HTTPS.
+⚠️ **Plan Netlify gratuit = 300 crédits/mois, plafond dur** : 15 crédits par déploiement de production (= chaque push sur `main`), 20 crédits par Go de bande passante. Quota épuisé = site suspendu jusqu'au mois suivant. **Grouper les modifications** (une branche, un seul merge) et surveiller Team → Usage & billing. Ne jamais renommer le projet Netlify (son nom est la cible du CNAME `www`).
 
-**Historique certificat (21/08/2026)** : le certificat de l'apex `pontonniersbex.ch` était bloqué chez GitHub à l'état `authorization_created` depuis le 29/06 (DNS pourtant valide). GitHub indexe les certificats par nom de domaine : retirer/remettre le domaine ne fait que *reprendre* l'enregistrement cassé. La bascule du domaine principal sur `www.pontonniersbex.ch` a créé un enregistrement neuf et débloqué l'émission. Le certificat couvre les deux noms (`www` + apex).
+### DNS (zone chez Infomaniak — ne pas déplacer, la messagerie y vit)
+- `pontonniersbex.ch` A → `75.2.60.5` (load balancer Netlify — un seul enregistrement A, jamais d'AAAA)
+- `www` CNAME → `pontonniersbex.netlify.app`
+- MX, SPF, DKIM, DMARC, autoconfig, autodiscover, Amazon SES : **ne jamais y toucher** (emails `@pontonniersbex.ch`)
+- TXT `_github-pages-challenge-geeruoss` : conservé (garde le domaine vérifié côté GitHub)
+
+### Historique
+- **29/06 → 03/09/2026** : hébergé sur GitHub Pages, mais GitHub n'a jamais émis le certificat HTTPS du domaine custom (état `authorization_created` puis `new`, sans fin), alors que le DNS était valide. Cause : panne de la file de provisioning Pages fin août 2026, jamais annoncée, plusieurs domaines touchés ([discussion #205765](https://github.com/orgs/community/discussions/205765)). Aucun site resté sur Pages n'a obtenu son certificat.
+- **03/09/2026** : migration vers Netlify. Certificat Let's Encrypt émis **10 minutes** après la bascule DNS. Le repo GitHub reste la source de vérité.
 
 ---
 Designed by Ruoss! Communication
